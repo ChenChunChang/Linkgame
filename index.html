@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta charset="UTF-8" />
+    <title>翻大牌</title>
+    <link rel="stylesheet" href="css/animate.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <!-- 进入网页的预加载效果 -->
+    <div class="loading">
+        <div id="preloader_1">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!-- 网页的主体内容 -->
+    <div class="wrap">
+        <!--活动规则、小X号-->
+        <div class="rule-wrap">
+            <div class="x"></div>
+        </div>
+        <!--页脚进入游戏，活动规则-->
+        <div class="footer" style="display:none">
+            <span class="start"></span>
+            <p>>>><span class="rule">活动规则</span>
+                <<<</p>
+        </div>
+        <!--第一关-->
+        <div class="first" style="display: none;">
+            <img class="firstgame" src="images/first.png" />
+        </div>
+        <div class="two" style="display: none;">
+            <img class="twogame" src="images/second.png" />
+        </div>
+		<div class="three" style="display: none;">
+            <img class="threegame" src="images/third.png" />
+        </div>
+        <!--下一关-->
+        <div class="next" style="display:none">
+			<img id="nextg" src="images/next.png"/>
+		</div>
+        <!--失败者-->
+        <div class="lose" style="display:none">
+			<img id="loseX" src="images/lose.png"/>
+		</div>
+        <!--游戏的主体内容-->
+        <div class="draw" style="display: none;">
+            <div class="draw-time">
+                <p id="left">0</p>
+                <p id="right">10</p>
+                <p id="content">100%</p>
+                <div class="countdown"></div>
+            </div>
+            <div id="draw-main1" >
+                <div id="cards">
+                    <div class="card">
+                        <div class="face front"></div>
+                        <div class="face back"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="draw-footer">
+                你的抽奖次数：3次
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/jQueryTween-aio-min.js"></script>
+<script type="text/javascript" src="js/touch-0.2.14.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+</html>

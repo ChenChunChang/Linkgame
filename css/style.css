@@ -1,0 +1,541 @@
+/* reset */
+body,h1,h2,h3,h4,p,dl,dd,ul,ol,form,input,textarea,th,td,select{margin: 0;padding: 0;}
+em{font-style: normal;}
+li{list-style: none;}
+a{text-decoration: none;}
+img{border: none;vertical-align: top;}
+table{border-collapse: collapse;}
+input,textarea{outline: none;}
+textarea{resize:none;overflow: auto;}
+body{font-size:12px;font-family: arial;}
+html,body{width:100%;height: 100%;font-size: 15px;font-family: "微软雅黑";overflow:hidden;}
+/*---------*/
+/*----预加载----*/
+.loading{
+    width:100%;
+    height:100%;
+    background-color: black;
+    z-index: 999;
+}
+#preloader_1{
+    position:relative;
+    left:45%;
+    top:50%;
+}
+#preloader_1 span{
+    display:block;
+    bottom:0px;
+    width: 9px;
+    height: 5px;
+    background:#9b59b6;
+    position:absolute;
+    animation: preloader_1 1.5s  infinite ease-in-out;
+}
+
+#preloader_1 span:nth-child(2){
+left:11px;
+animation-delay: .2s;
+
+}
+#preloader_1 span:nth-child(3){
+left:22px;
+animation-delay: .4s;
+}
+#preloader_1 span:nth-child(4){
+left:33px;
+animation-delay: .6s;
+}
+#preloader_1 span:nth-child(5){
+left:44px;
+animation-delay: .8s;
+}
+@keyframes preloader_1 {
+    0% {height:5px;transform:translateY(0px);background:#9b59b6;}
+    25% {height:30px;transform:translateY(15px);background:#3498db;}
+    50% {height:5px;transform:translateY(0px);background:#9b59b6;}
+    100% {height:5px;transform:translateY(0px);background:#9b59b6;}
+}
+/*----预加载----*/
+
+
+/* --------网页的主体内容------ */
+.wrap{
+    width:100%;
+    height:100%;
+    /*background: black;*/
+}
+.rule-wrap{
+    width:100%;
+    height:100%;
+    background: url("../images/rule.png") 0 0 no-repeat;
+    background-size:100% 100%;
+}
+.x{
+    width:11%;
+    height:6%;
+    position:absolute;
+    left:82%;
+    top: 5%;
+}
+
+.footer{
+    width:100%;
+    height:100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background:url("../images/bg.png") 0 0 no-repeat;
+    background-size:100% 100%;
+}
+.start{position:absolute;background:url(../images/start.png);width:30% ;height: 7%;background-size: 100% 100%;left:35%;top:75%}
+.footer p{text-align: center;position: absolute;width: 100%;top: 85%;color: #808084;}
+
+
+/*first*/
+.first{
+	width:100%;
+	height: 100%;
+	background-color: #DCDCDD;
+	position: relative;
+	top: -100%;
+}
+.first img{
+	width: 50%;
+	position: absolute;
+	left: 25%;
+	top: 35%;
+}
+
+.draw{
+	width: 100%;
+	height: 100%;
+	background: url(../images/draw_bg.png) 0 0 no-repeat;
+	background-size: 100% 100%;
+}
+.draw-time{
+	width: 98%;
+	height: 7.4%;
+	position: absolute;
+	left: 1%;
+	background: url(../images/head_time.png) 0 0 no-repeat;
+	background-size: 100% 100%;
+	top: 5.4%;
+}
+.draw-time p:first-child{
+	display: inline-block;
+	position: absolute;
+	left: 5%;
+	top: 5.5%;
+}
+.draw-time p:nth-of-type(2){
+	display: inline-block;
+	position: absolute;
+	right: 4.5%;
+	top: 5.5%;
+}
+.draw-time p:nth-of-type(3){
+	display: inline-block;
+	color: white;
+	position: absolute;
+	left: 70%;
+	top: 50%;
+}
+.draw-footer{
+	width: 100%;
+	height: 7%;
+	height: 7%;
+	background: url(../images/draw_footer.png) 0 0 no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 87%;
+	color:white;
+	text-align: center;
+	line-height: 40px;
+}
+.countdown{
+	width: 78%;
+    background: url(../images/countdown.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    height: 50%;
+    left: 11%;
+    top: 3%;
+    border-radius: 15px;
+    transition: 10s linear;
+}
+/*------------*/
+#draw-main1{
+	width: 66.7%;
+	height: 62.2%;
+	position: absolute;
+	left:16.6%;
+	top: 15%;
+}
+#cards {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 2% auto;
+    margin-left: 5%;
+}
+.card {
+    width: 40%;
+    height: 30%;
+    margin-left: 2%;
+    position: absolute;
+}
+
+.face {
+    /* float: left; */
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: all .3s;
+}
+
+.front {
+    background: #999 url("../images/goretex.png") 0 0 no-repeat;
+    background-size: 100% 100%;
+    z-index: 10;
+}
+
+.back {
+    background: #efefef url("../images/goretex.png");
+    -webkit-transform-rotateY(-180deg);
+    z-index: 8;
+}
+
+.face:hover {
+    -webkit-box-shadow: 0 0 40px #aaa;
+}
+/*牌面定位样式*/
+
+.goretex1 {
+    background: url("../images/goretex1.png") 0 0 no-repeat;
+    background-size: 100% 100%;
+}
+
+.goretex2 {
+    background: url("../images/goretex2.png") 0 0 no-repeat;
+    background-size: 100% 100%;
+}
+
+.goretex3 {
+    background: url("../images/goretex3.png") 0 0 no-repeat;
+    background-size: 100% 100%;
+}
+
+.card-flipped .front {
+    /*保证牌底在牌面下面，z-index值切换为小值*/
+    z-index: 8;
+    -webkit-transform: rotateY(180deg);
+}
+
+.card-flipped .back {
+    /*保证牌底在牌面上面，z-index值切换为大值*/
+    z-index: 10;
+    /*前面牌面已经翻过去，现在返回来*/
+    -webkit-transform: rotateY(0deg);
+}
+/*移除牌*/
+
+.card-removed {
+    opacity: 0;
+}
+/*------------*/
+/*first*/
+/* next */
+.mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+}
+.next img{
+    width:50%;
+    position:absolute;
+    left: 25%;
+    top: 35%;
+}
+.lose img{
+    width:50%;
+    position:absolute;
+    left: 25%;
+    top: 35%;
+}
+/* next */
+/* two */
+.two{
+    width:100%;
+    height: 100%;
+    background-color: #DCDCDD;
+    position: relative;
+    top: -100%;
+}
+.two img{
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    top: 35%;
+}
+
+#draw-main2 {
+        width: 66.7%;
+        height: 62.2%;
+        position: absolute;
+        left: 16.6%;
+        top: 15%;
+        // border: 1px solid red;
+    }
+
+    #cards2 {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin: 2% auto;
+        margin-left: 3%;
+    }
+
+    .card2 {
+        width: 30%;
+        height: 20%;
+        margin-left: 1%;
+        position: absolute;
+    }
+
+    .face2 {
+        /* float: left; */
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        -webkit-transition: all .3s;
+    }
+
+    .front2 {
+        background: #999 url("../images/goretex.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+        z-index: 10;
+    }
+
+    .back2 {
+        background: #efefef url("../images/goretex.png");
+        -webkit-transform-rotateY(-180deg);
+        z-index: 8;
+    }
+
+    .face2:hover {
+        -webkit-box-shadow: 0 0 40px #aaa;
+    }
+    /*牌面定位样式*/
+
+    .goretex1 {
+        background: url("../images/goretex1.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex2 {
+        background: url("../images/goretex2.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex3 {
+        background: url("../images/goretex3.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex4 {
+        background: url("../images/goretex4.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex5 {
+        background: url("../images/goretex5.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex6 {
+        background: url("../images/goretex6.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .card-flipped .front2 {
+        /*保证牌底在牌面下面，z-index值切换为小值*/
+        z-index: 8;
+        -webkit-transform: rotateY(180deg);
+    }
+
+    .card-flipped .back2 {
+        /*保证牌底在牌面上面，z-index值切换为大值*/
+        z-index: 10;
+        /*前面牌面已经翻过去，现在返回来*/
+        -webkit-transform: rotateY(0deg);
+    }
+    .countdown2{
+    width: 78%;
+    background: url(../images/countdown.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    height: 50%;
+    left: 11%;
+    top: 3%;
+    border-radius: 15px;
+    transition: 30s linear;
+}
+    /*移除牌*/
+
+/* two */
+/* three */
+.three{
+    width:100%;
+    height: 100%;
+    background-color: #DCDCDD;
+    position: relative;
+    top: -100%;
+}
+.three img{
+    width: 50%;
+    position: absolute;
+    left: 25%;
+    top: 35%;
+}
+
+#draw-main3 {
+        width: 66.7%;
+        height: 62.2%;
+        position: absolute;
+        left: 16.6%;
+        top: 15%;
+        // border: 1px solid red;
+    }
+
+    #cards3 {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin: 2% auto;
+        margin-left: 3%;
+    }
+
+    .card3 {
+        width: 20%;
+        height: 20%;
+        margin-left: 1%;
+        position: absolute;
+    }
+
+    .face3 {
+        /* float: left; */
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        position: absolute;
+        -webkit-backface-visibility: hidden;
+        -webkit-transition: all .3s;
+    }
+
+    .front3 {
+        background: #999 url("../images/goretex.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+        z-index: 10;
+    }
+
+    .back3 {
+        background: #efefef url("../images/goretex.png");
+        -webkit-transform-rotateY(-180deg);
+        z-index: 8;
+    }
+
+    .face3:hover {
+        -webkit-box-shadow: 0 0 40px #aaa;
+    }
+    /*牌面定位样式*/
+
+    .goretex1 {
+        background: url("../images/goretex1.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex2 {
+        background: url("../images/goretex2.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex3 {
+        background: url("../images/goretex3.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex4 {
+        background: url("../images/goretex4.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex5 {
+        background: url("../images/goretex5.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .goretex6 {
+        background: url("../images/goretex6.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+    .goretex7 {
+        background: url("../images/goretex7.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+    .goretex8 {
+        background: url("../images/goretex8.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+    .goretex9 {
+        background: url("../images/goretex9.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+    .goretex10 {
+        background: url("../images/goretex10.png") 0 0 no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .card-flipped .front3 {
+        /*保证牌底在牌面下面，z-index值切换为小值*/
+        z-index: 8;
+        -webkit-transform: rotateY(180deg);
+    }
+
+    .card-flipped .back3 {
+        /*保证牌底在牌面上面，z-index值切换为大值*/
+        z-index: 10;
+        /*前面牌面已经翻过去，现在返回来*/
+        -webkit-transform: rotateY(0deg);
+    }
+    .countdown3{
+    width: 78%;
+    background: url(../images/countdown.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    height: 50%;
+    left: 11%;
+    top: 3%;
+    border-radius: 15px;
+    transition: 60s linear;
+}
+
+
+.pass img{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+}
+/* three */
+
+
+/* --------网页的主体内容------ */

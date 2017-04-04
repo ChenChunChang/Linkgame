@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>翻大牌</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div class="three" style="display: none;">
+        <img class="threegame" src="images/third.png" />
+    </div>
+    <!--下一关-->
+    <div class="next" style="display:none">
+        <img id="nextg" src="images/next.png" />
+    </div>
+    <!--失败者-->
+    <div class="lose" style="display:none">
+        <img id="loseX" src="images/lose.png" />
+    </div>
+    <div class="draw">
+        <div class="draw-time">
+            <p id="left2">0</p>
+            <p id="right2">30</p>
+            <p id="content2">100%</p>
+            <div class="countdown2"></div>
+        </div>
+        <div id="draw-main2">
+            <div id="cards2">
+                <div class="card2">
+                    <div class="face2 front2"></div>
+                    <div class="face2 back2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="draw-footer">
+            你的抽奖次数：3次
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/touch-0.2.14.min.js"></script>
+<script type="text/javascript" src="js/jQueryTween-aio-min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var neusoft = {};
+    neusoft.matchingGame = {};
+    neusoft.matchingGame.cardWidth = 75; //牌宽
+    neusoft.matchingGame.cardHeight = 100;
+    neusoft.matchingGame.deck = [
+            "goretex1", "goretex1",
+            "goretex2", "goretex2",
+            "goretex3", "goretex3",
+            "goretex4", "goretex4",
+            "goretex5", "goretex5",
+            "goretex6", "goretex6"
+
+        ]
+        //随机排序函数，返回-1或1
+    function shuffle() {
+        //Math.random能返回0~1之间的数
+        return Math.random() > 0.5 ? -1 : 1
+    }
+    //  翻牌功能的实现
+    function selectCard() {
+        var $fcard = $(".card-flipped");
+        //翻了两张牌后退出翻牌
+        if ($fcard.length > 1) {
+            return;
+        }
+        //alert($(this).data("pattern"));
+        $(this).addClass("card-flipped");
+        //    若翻动了两张牌，检测一致性
+        var $fcards = $(".card-flipped");
+        if ($fcards.length == 2) {
+            // checkPattern($fcards);
+            setTimeout(function() {
+                checkPattern($fcards);
+            }, 700);
+        }
+    }
+    //检测2张牌是否一致
+    function checkPattern(cards) {
+        var pattern1 = $(cards[0]).data("pattern");
+        var pattern2 = $(cards[1]).data("pattern");
+        $(cards).removeClass("card-flipped");
+        if (pattern1 == pattern2) {
+            $(cards).addClass("card-removed")
+                .bind("webkitTransitionEnd", function() {
+                    $(this).remove();
+                });
+        }
+    }
+    //实现随机洗牌
+    neusoft.matchingGame.deck.sort(shuffle);
+    //alert(neusoft.matchingGame.deck);
+    var $card = $(".card2");
+    for (var i = 0; i < 11; i++) {
+        $card.clone().appendTo($("#cards2"));
+    }
+    //对每张牌进行设置
+    $(".card2").each(function(index) {
+        //调整坐标
+        $(this).css({
+            "left": (neusoft.matchingGame.cardWidth + 5) * (index % 3) + "px",
+            "top": (neusoft.matchingGame.cardHeight + 5) * Math.floor(index / 3) + "px"
+        });
+        //吐出一个牌号
+        var pattern = neusoft.matchingGame.deck.pop();
+        //暂存牌号
+        $(this).data("pattern", pattern);
+        //把其翻牌后的对应牌面附加上去
+        $(this).find(".back2").addClass(pattern);
+        //点击牌的功能函数挂接
+        $(this).click(selectCard);
+    });
+
+
+    /*------------------*/
+    $(".countdown2").css("width", "0%");
+    var wW2 = 100;
+    var wW1timer2 = setInterval(function() {
+        wW2--;
+        $("#content2").text(wW2 + "%");
+        if (wW2 <= 0) {
+            clearInterval(wW1timer2);
+        }
+    }, 300);
+
+
+    /*-------------------*/
+    var time2 = 30;
+    var gameBol = true;
+    if (gameBol) {
+        gameBol = false;
+        var gameTimer2 = setInterval(function() {
+            time2--;
+            $("#right2").text(time2);
+            /*-------------*/
+            if (time2 >= 0 && $("#cards2").find("div").length == 0) {
+                // 恭喜过关下一关
+                $(".next").addClass("mask");
+                $(".next").show();
+                touch.on("#nextg", "tap", function() {
+                    $(".next").hide();
+
+                    $(".three").show();
+                    var $three = $(".three");
+                    $three.jQueryTween({
+                        from: {
+                            translate: {
+                                x: 0,
+                                y: 0,
+                                z: 0
+                            },
+                        },
+                        to: {
+                            translate: {
+                                x: 0,
+                                y: 667,
+                                z: 0
+                            },
+                        },
+                        duration: 1000,
+                        easing: TWEEN.Easing.Bounce.Out, // my favorite
+                        delay: 100,
+                    }, function() {
+                        $(".draw").hide();
+                    });
+                    touch.on(".threegame", "tap", function() {
+
+                        window.location.href = "three.html";
+                    });
+                });
+
+
+            }
+            /*-------------*/
+            if (time2 <= 0 && $("#cards2").find("div").length > 0) {
+                // 闯关失败重新来过
+                $(".lose").addClass("mask");
+                $(".lose").show();
+                touch.on("#loseX", "tap", function() {
+                    window.location.href = "index.html";
+                });
+            }
+            if (time2 <= 0) {
+                clearInterval(gameTimer2);
+            }
+        }, 1000);
+
+
+    }
+});
+</script>
+
+</html>

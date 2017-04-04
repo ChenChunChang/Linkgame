@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>翻大牌</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div class="three" style="display: none;">
+        <img class="threegame" src="images/third.png" />
+    </div>
+    <!--下一关-->
+    <div class="next" style="display:none">
+        <img id="nextg" src="images/next.png" />
+    </div>
+    <!--失败者-->
+    <div class="lose" style="display:none">
+        <img id="loseX" src="images/lose.png" />
+    </div>
+    <div class="draw">
+        <div class="draw-time">
+            <p id="left3">0</p>
+            <p id="right3">60</p>
+            <p id="content3">100%</p>
+            <div class="countdown3"></div>
+        </div>
+        <div id="draw-main3">
+            <div id="cards3">
+                <div class="card3">
+                    <div class="face3 front3"></div>
+                    <div class="face3 back3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="draw-footer">
+            你的抽奖次数：3次
+        </div>
+    </div>
+    <div class="pass" style="display:none">
+        <img src="images/pass.png" alt="" />
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/touch-0.2.14.min.js"></script>
+<script type="text/javascript" src="js/jQueryTween-aio-min.js"></script>
+<script type="text/javascript">
+$(function() {
+    var neusoft = {};
+    neusoft.matchingGame = {};
+    neusoft.matchingGame.cardWidth = 50; //牌宽
+    neusoft.matchingGame.cardHeight = 80;
+    neusoft.matchingGame.deck = [
+            "goretex1", "goretex1",
+            "goretex2", "goretex2",
+            "goretex3", "goretex3",
+            "goretex4", "goretex4",
+            "goretex5", "goretex5",
+            "goretex6", "goretex6",
+            "goretex7", "goretex7",
+            "goretex8", "goretex8",
+            "goretex9", "goretex9",
+            "goretex10", "goretex10"
+        ]
+        //随机排序函数，返回-1或1
+    function shuffle() {
+        //Math.random能返回0~1之间的数
+        return Math.random() > 0.5 ? -1 : 1
+    }
+    //  翻牌功能的实现
+    function selectCard() {
+        var $fcard = $(".card-flipped");
+        //翻了两张牌后退出翻牌
+        if ($fcard.length > 1) {
+            return;
+        }
+        //alert($(this).data("pattern"));
+        $(this).addClass("card-flipped");
+        //    若翻动了两张牌，检测一致性
+        var $fcards = $(".card-flipped");
+        if ($fcards.length == 2) {
+            // checkPattern($fcards);
+            setTimeout(function() {
+                checkPattern($fcards);
+            }, 700);
+        }
+    }
+    //检测2张牌是否一致
+    function checkPattern(cards) {
+        var pattern1 = $(cards[0]).data("pattern");
+        var pattern2 = $(cards[1]).data("pattern");
+        $(cards).removeClass("card-flipped");
+        if (pattern1 == pattern2) {
+            $(cards).addClass("card-removed")
+                .bind("webkitTransitionEnd", function() {
+                    $(this).remove();
+                });
+        }
+    }
+    //实现随机洗牌
+    neusoft.matchingGame.deck.sort(shuffle);
+    //alert(neusoft.matchingGame.deck);
+    var $card = $(".card3");
+    for (var i = 0; i < 19; i++) {
+        $card.clone().appendTo($("#cards3"));
+    }
+    //对每张牌进行设置
+    $(".card3").each(function(index) {
+        //调整坐标
+        $(this).css({
+            "left": (neusoft.matchingGame.cardWidth + 5) * (index % 4) + "px",
+            "top": (neusoft.matchingGame.cardHeight + 5) * Math.floor(index / 4) + "px"
+        });
+        //吐出一个牌号
+        var pattern = neusoft.matchingGame.deck.pop();
+        //暂存牌号
+        $(this).data("pattern", pattern);
+        //把其翻牌后的对应牌面附加上去
+        $(this).find(".back3").addClass(pattern);
+        //点击牌的功能函数挂接
+        $(this).click(selectCard);
+    });
+
+
+    /*------------------*/
+    $(".countdown3").css("width", "0%");
+    var wW3 = 100;
+    var wW1timer3 = setInterval(function() {
+        wW3--;
+        $("#content3").text(wW3 + "%");
+        if (wW3 <= 0) {
+            clearInterval(wW1timer3);
+        }
+    }, 600);
+
+
+    /*-------------------*/
+    var time3 = 60;
+    var gameBol = true;
+    if (gameBol) {
+        gameBol = false;
+        var gameTimer3 = setInterval(function() {
+            time3--;
+            $("#right3").text(time3);
+            /*-------------*/
+            if (time3 >= 0 && $("#cards3").find("div").length == 0) {
+
+                $(".pass").show();
+                /*-------*/
+
+
+            }
+            /*-------------*/
+            if (time3 <= 0 && $("#cards3").find("div").length > 0) {
+                // 闯关失败重新来过
+                $(".lose").addClass("mask");
+                $(".lose").show();
+                touch.on("#loseX", "tap", function() {
+                    window.location.href = "index.html";
+                });
+            }
+            if (time3 <= 0) {
+                clearInterval(gameTimer3);
+            }
+        }, 1000);
+
+
+    }
+});
+</script>
+
+</html>
